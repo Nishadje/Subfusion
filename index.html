@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SubFusion — All-in-One Subscriptions (BD)</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand:{50:'#e6f6ff',100:'#ccecff',200:'#99daff',300:'#66c7ff',400:'#33b5ff',500:'#00a3ff',600:'#0083cc',700:'#006299',800:'#004266',900:'#002133'} },
+        boxShadow:{ glow:'0 10px 40px rgba(0,163,255,.25), inset 0 1px 0 rgba(255,255,255,.06)' }
+      }}
+    }
+  </script>
+  <style>
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:14px;padding:.6rem 1rem;font-weight:700;white-space:nowrap}
+    .btn-primary{background:linear-gradient(90deg,#00a3ff,#12c2e9);color:#fff;box-shadow:0 10px 30px rgba(0,163,255,.35)}
+    .btn-soft{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff}
+    .chip{padding:.25rem .6rem;border-radius:999px;font-size:.75rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+    .tag{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;background:rgba(0,163,255,.12);border:1px solid rgba(0,163,255,.35);color:#7dd3fc;padding:.25rem .5rem;border-radius:8px}
+    .grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .toggle{position:relative;width:52px;height:28px;background:rgba(255,255,255,.2);border-radius:999px;cursor:pointer}
+    .toggle::after{content:'';position:absolute;inset:3px;width:22px;height:22px;border-radius:999px;background:#fff;transition:.2s}
+    .toggle.active{background:#00a3ff}.toggle.active::after{transform:translateX(24px)}
+    .brand-logo{height:22px;opacity:.95;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25))}
+    .hero-grad{background:
+      radial-gradient(1200px 400px at 10% -10%, rgba(0,163,255,.15), transparent 60%),
+      radial-gradient(1000px 500px at 90% -10%, rgba(18,194,233,.12), transparent 60%),
+      linear-gradient(to bottom, #0b1220, #05070c 40%, #000);}
+  </style>
+</head>
+<body class="min-h-screen hero-grad text-white">
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" class="w-9 h-9" alt="Logo"/>
+        <div>
+          <h1 class="text-lg font-black tracking-tight">SubFusion</h1>
+          <p class="text-xs text-white/60 -mt-0.5">All-in-One Subscriptions • Bangladesh</p>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-2">
+        <a href="#catalog" class="btn btn-soft text-sm"><i class="ri-store-2-line"></i> Catalog</a>
+        <a href="#how" class="btn btn-soft text-sm"><i class="ri-questionnaire-line"></i> How it works</a>
+        <button id="themeToggle" class="btn btn-soft text-sm"><i class="ri-contrast-2-line"></i> Theme</button>
+        <a href="#catalog" class="btn btn-primary text-sm"><i class="ri-shopping-bag-3-line"></i> Start</a>
+      </div>
+      <a href="#catalog" class="sm:hidden btn btn-primary text-sm"><i class="ri-shopping-bag-3-line"></i> Start</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative">
+    <div class="max-w-7xl mx-auto px-4 pt-10 pb-8 md:pt-16 md:pb-10 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <div class="tag mb-3">Premium Theme • Ultra Responsive</div>
+        <h2 class="text-3xl md:text-5xl font-black leading-tight">সব কিছু এক প্ল্যাটফর্মে—<span class="text-sky-300">টপ-আপ, সাবস্ক্রিপশন, গিফট কার্ড, বুস্ট</span>।</h2>
+        <p class="text-white/70 mt-3 md:text-lg">bKash • Nagad • Rocket • Online Card (SSLCOMMERZ)। ক্লিক করুন “More details” → সব প্ল্যান/দাম দেখুন।</p>
+        <div class="mt-5 flex flex-wrap gap-3">
+          <a href="#catalog" class="btn btn-primary"><i class="ri-rocket-2-line"></i> Explore</a>
+          <a href="#brands" class="btn btn-soft"><i class="ri-vip-diamond-line"></i> Brands</a>
+        </div>
+      </div>
+
+      <!-- Quick Picks → এখন শুধু Details ওপেন -->
+      <div class="glass rounded-2xl p-5 md:p-7 shadow-glow">
+        <div class="text-sm text-white/70 mb-2">Quick Picks</div>
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <button class="btn btn-soft" onclick="openDetails('youtube')"><i class="ri-youtube-fill text-red-500"></i> YT Premium</button>
+          <button class="btn btn-soft" onclick="openDetails('discord-nitro')"><i class="ri-discord-fill text-indigo-300"></i> Nitro</button>
+          <button class="btn btn-soft" onclick="openDetails('freefire-diamond')"><i class="ri-fire-fill text-orange-400"></i> Free Fire</button>
+          <button class="btn btn-soft" onclick="openDetails('xbox-game-pass')"><i class="ri-xbox-fill text-emerald-300"></i> Game Pass</button>
+        </div>
+        <div class="mt-4 text-xs text-white/60">অ্যাক্টিভ প্রোডাক্ট: <b id="statPlans">0</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section id="brands" class="max-w-7xl mx-auto px-4">
+    <div class="glass rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-white/10">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="YouTube" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Netflix" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Disney+" src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Prime Video" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Xbox" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Xbox_one_logo.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Steam" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Epic Games" src="https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Apple" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Google Play" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Roblox" src="https://upload.wikimedia.org/wikipedia/commons/9/90/Roblox_2019_Logo.svg">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Minecraft" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Minecraft_cover.png">
+      <img referrerpolicy="no-referrer" class="brand-logo" alt="Free Fire" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Garena_Free_Fire_logo.svg">
+    </div>
+  </section>
+
+  <!-- CONTROLS -->
+  <section id="catalog" class="max-w-7xl mx-auto px-4 py-6">
+    <div class="glass rounded-2xl p-4 md:p-5 border-white/10">
+      <div class="flex flex-col md:flex-row md:items-end gap-4">
+        <div class="flex-1">
+          <label class="block text-sm text-white/70 mb-1">সার্চ</label>
+          <div class="relative">
+            <i class="ri-search-2-line absolute left-3 top-1/2 -translate-y-1/2 text-white/40"></i>
+            <input id="searchInput" type="text" placeholder="YouTube, Netflix, Free Fire, Robux…" class="w-full bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 outline-none focus:ring-2 focus:ring-brand-500">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm text-white/70 mb-1">ক্যাটাগরি</label>
+          <select id="categorySelect" class="bg-white/5 border border-white/10 rounded-xl px-3 py-2.5">
+            <option value="all">All</option>
+            <option value="streaming">🎬 Streaming</option>
+            <option value="ai">🤖 AI</option>
+            <option value="gaming">🎮 Game Top-up</option>
+            <option value="keys">🗝️ Game Keys</option>
+            <option value="giftcard">🎁 Gift Cards</option>
+            <option value="communication">💬 Communication</option>
+            <option value="ads">📣 Social/Ads</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm text-white/70 mb-1">সোর্ট</label>
+          <select id="sortSelect" class="bg-white/5 border border-white/10 rounded-xl px-3 py-2.5">
+            <option value="popular">Most Popular</option>
+            <option value="price_asc">Price ↑</option>
+            <option value="price_desc">Price ↓</option>
+            <option value="name_asc">Name A→Z</option>
+            <option value="name_desc">Name Z→A</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm text-white/70 mb-1">ডার্ক মোড</label>
+          <div id="modeSwitch" class="toggle active"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="mt-6 grid-auto" id="productGrid"></div>
+    <div id="emptyState" class="hidden text-center text-white/60 py-16">
+      <i class="ri-inbox-archive-line text-5xl text-white/20"></i>
+      <p class="mt-3 text-lg">কিছু পাওয়া যায়নি। সার্চ/ফিল্টার পরিবর্তন করুন।</p>
+    </div>
+  </section>
+
+  <footer id="how" class="mt-12 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-8 text-center text-white/60 text-sm">
+      <p><b>কিভাবে কাজ করে?</b> প্রোডাক্টে “More details” ক্লিক করুন → নতুন পেজে সব প্ল্যান/দাম দেখুন → Add to Cart (সেখানেই)।</p>
+      <p class="mt-2">© <span id="year"></span> SubFusion • Built with ❤️</p>
+    </div>
+  </footer>
+
+  <script>
+    const OWNER_EMAIL = "nishadjr875@gmail.com";
+
+    /* ---------- PRODUCTS ---------- */
+    const PRODUCTS = [
+      { id:'youtube', name:'YouTube Premium', category:'streaming', rating:4.9, popular:true, badge:'Hot',
+        plans:[{label:'1 Month',price:100},{label:'2 Months',price:200},{label:'12 Months',price:1100}],
+        perks:['Ad-free','Background play','YT Music'],
+        inputs:[{key:'yt_email',label:'YouTube/Gmail',placeholder:'your@gmail.com',type:'email',required:true}]
+      },
+      { id:'netflix', name:'Netflix', category:'streaming', rating:4.8, popular:true, badge:'Trending',
+        plans:[{label:'1 Month',price:350},{label:'3 Months',price:999},{label:'12 Months',price:3799}],
+        perks:['HD/4K','Multiple Profiles'],
+        inputs:[{key:'profile_email',label:'Profile Email (optional)',placeholder:'you@example.com',type:'email',required:false}]
+      },
+      { id:'prime-video', name:'Prime Video', category:'streaming', rating:4.6,
+        plans:[{label:'1 Month',price:199},{label:'6 Months',price:1099}], perks:['Amazon Originals','X-Ray'],
+        inputs:[{key:'pv_email',label:'Amazon Email',placeholder:'your@email.com',type:'email',required:true}]
+      },
+      { id:'disney-plus', name:'Disney+', category:'streaming', rating:4.7,
+        plans:[{label:'1 Month',price:249},{label:'12 Months',price:2199}], perks:['Marvel','Star Wars'],
+        inputs:[{key:'dsny_email',label:'Account Email',placeholder:'your@email.com',type:'email',required:true}]
+      },
+
+      { id:'chatgpt-plus', name:'ChatGPT Plus', category:'ai', rating:4.9, badge:'Pro',
+        plans:[{label:'1 Month',price:950},{label:'3 Months',price:2700}], perks:['Priority Access','Faster responses'],
+        inputs:[{key:'gpt_email',label:'OpenAI Email',placeholder:'your@email.com',type:'email',required:true}]
+      },
+
+      { id:'discord-nitro', name:'Discord Nitro', category:'communication', rating:4.7,
+        plans:[{label:'1 Month',price:299},{label:'12 Months',price:2999}], perks:['Animated emoji','HD streaming'],
+        inputs:[{key:'discord_user',label:'Discord Username / ID',placeholder:'user#1234 বা User ID',type:'text',required:true}]
+      },
+
+      { id:'pubg-uc', name:'PUBG Mobile UC', category:'gaming', rating:4.8,
+        plans:[{label:'60 UC',price:79},{label:'300 UC',price:350},{label:'660 UC',price:740},{label:'1800 UC',price:1890}],
+        perks:['Instant top-up (ID)'],
+        inputs:[{key:'pubg_id',label:'PUBG Player ID',placeholder:'5123456789',type:'text',required:true}]
+      },
+      { id:'freefire-diamond', name:'Free Fire Diamonds', category:'gaming', rating:4.7, badge:'New',
+        plans:[{label:'100 Diamonds',price:110},{label:'310 Diamonds',price:330},{label:'520 Diamonds',price:540},{label:'1060 Diamonds',price:1100}],
+        perks:['Top-up via Player ID'],
+        inputs:[{key:'ff_uid',label:'Free Fire UID',placeholder:'Player UID',type:'text',required:true},{key:'ff_server',label:'Server/Region',placeholder:'BD/SG/IN ...',type:'text'}]
+      },
+      { id:'minecraft', name:'Minecraft (Java/Bedrock)', category:'keys', rating:4.7,
+        plans:[{label:'Java Edition (Key)',price:2599},{label:'Bedrock (Key)',price:1999}],
+        perks:['Official Key','Email Delivery'],
+        inputs:[{key:'delivery_email',label:'Delivery Email',placeholder:'Code পাঠানোর ইমেইল',type:'email',required:true}]
+      },
+
+      { id:'xbox-game-pass', name:'Xbox Game Pass', category:'giftcard', rating:4.8,
+        plans:[{label:'1 Month',price:599},{label:'3 Months',price:1699}], perks:['PC/Console'],
+        inputs:[{key:'delivery_email',label:'Delivery Email',placeholder:'Code পাঠানোর ইমেইল',type:'email',required:true}]
+      },
+      { id:'steam-gc', name:'Steam Gift Card', category:'giftcard', rating:4.8,
+        plans:[{label:'$10',price:1200},{label:'$20',price:2350},{label:'$50',price:5900}], perks:['Region-Note Applies'],
+        inputs:[{key:'delivery_email',label:'Delivery Email',placeholder:'Code পাঠানোর ইমেইল',type:'email',required:true}]
+      },
+      { id:'fb-boost', name:'Facebook Page/Ads Boost', category:'ads', rating:4.5, badge:'Business',
+        plans:[{label:'৳500 Credits',price:500},{label:'৳1000 Credits',price:1000},{label:'৳5000 Credits',price:5000}],
+        perks:['Targeted promotion','Report included'],
+        inputs:[
+          {key:'page_url',label:'Page/Ad URL',placeholder:'https://facebook.com/yourpage',type:'url',required:true},
+          {key:'notes',label:'Notes (Target/Goal)',placeholder:'Age/Location/Interest...',type:'text'}
+        ]
+      },
+    ];
+
+    /* ---------- UTIL ---------- */
+    const byId = (id)=>document.getElementById(id);
+    const fmtBDT = (n)=>`৳${n.toLocaleString('en-IN')}`;
+    function minPrice(p){ return Math.min(...p.plans.map(x=>x.price)); }
+    function openDetails(pid){
+      const prod = PRODUCTS.find(x=>x.id===pid);
+      localStorage.setItem('sf_detail_product', JSON.stringify(prod));
+      window.open('product.html', '_blank');
+    }
+
+    /* ---------- GRID RENDER (কোনো Add নেই) ---------- */
+    const productGrid = byId('productGrid'), emptyState = byId('emptyState');
+    function labelCat(c){ return c==='streaming'?'Streaming':c==='ai'?'AI':c==='gaming'?'Game Top-up':c==='keys'?'Game Keys':c==='giftcard'?'Gift Cards':c==='communication'?'Communication':c==='ads'?'Social/Ads':c; }
+
+    function renderProducts(){
+      const q=byId('searchInput').value.toLowerCase().trim();
+      const cat=byId('categorySelect').value;
+      const sort=byId('sortSelect').value;
+      let list=[...PRODUCTS].filter(p=>{
+        const inCat=(cat==='all'||p.category===cat);
+        const matches=p.name.toLowerCase().includes(q)||p.plans.some(pl=>pl.label.toLowerCase().includes(q));
+        return inCat&&matches;
+      });
+      list.sort((a,b)=>{
+        if (sort==='popular') return (b.popular===true)-(a.popular===true)||b.rating-a.rating;
+        if (sort==='price_asc') return minPrice(a)-minPrice(b);
+        if (sort==='price_desc') return minPrice(b)-minPrice(a);
+        if (sort==='name_asc') return a.name.localeCompare(b.name);
+        if (sort==='name_desc') return b.name.localeCompare(a.name);
+        return 0;
+      });
+
+      productGrid.innerHTML='';
+      if(!list.length){ emptyState.classList.remove('hidden'); return; }
+      emptyState.classList.add('hidden');
+
+      for (const p of list){
+        const card=document.createElement('div');
+        card.className='glass rounded-2xl p-4 border-white/10 shadow-glow';
+        card.innerHTML=`
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-2">
+                <button class="text-left font-extrabold text-lg hover:underline" data-info="${p.id}">${p.name}</button>
+                ${p.badge?`<span class="tag">${p.badge}</span>`:''}
+              </div>
+              <div class="text-xs text-white/60 mt-1">⭐ ${p.rating.toFixed(1)} • ${labelCat(p.category)}</div>
+            </div>
+            <button class="btn btn-soft text-xs" data-info="${p.id}">
+              <i class="ri-information-line"></i> More details
+            </button>
+          </div>
+
+          <div class="mt-3 flex flex-wrap gap-2">${(p.perks||[]).map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+
+          <div class="mt-4 text-sm text-white/70">
+            Starts at <b>${fmtBDT(minPrice(p))}</b>
+          </div>
+        `;
+        productGrid.appendChild(card);
+      }
+
+      // সব info/শিরোনাম → ডিটেইল পেজ
+      productGrid.querySelectorAll('[data-info]').forEach(btn=>{
+        btn.addEventListener('click', ()=> openDetails(btn.dataset.info));
+      });
+    }
+
+    function init(){
+      document.getElementById('year').textContent=new Date().getFullYear();
+      document.getElementById('statPlans').textContent = PRODUCTS.length;
+      document.getElementById('modeSwitch').onclick=()=>{ document.body.classList.toggle('dark'); document.getElementById('modeSwitch').classList.toggle('active'); };
+      document.getElementById('themeToggle').onclick=()=>{ document.body.classList.toggle('dark'); document.getElementById('modeSwitch').classList.toggle('active'); };
+
+      renderProducts();
+      document.getElementById('searchInput').addEventListener('input', renderProducts);
+      document.getElementById('categorySelect').addEventListener('change', renderProducts);
+      document.getElementById('sortSelect').addEventListener('change', renderProducts);
+    }
+    init();
+  </script>
+</body>
+</html>

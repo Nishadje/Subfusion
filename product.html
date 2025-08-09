@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Product Details — SubFusion</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{ colors:{brand:{500:'#00a3ff'}}, boxShadow:{glow:'0 10px 40px rgba(0,163,255,.25)'} } } }
+  </script>
+  <style>
+    body{background:radial-gradient(800px 300px at 10% -10%,rgba(0,163,255,.15),transparent 60%), #0b1220;color:#fff}
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px)}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;border-radius:14px;padding:.6rem 1rem;font-weight:700;white-space:nowrap}
+    .btn-primary{background:linear-gradient(90deg,#00a3ff,#12c2e9);color:#fff;box-shadow:0 10px 30px rgba(0,163,255,.35)}
+    .btn-soft{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff}
+    .tag{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;background:rgba(0,163,255,.12);border:1px solid rgba(0,163,255,.35);color:#7dd3fc;padding:.25rem .5rem;border-radius:8px}
+    .chip{padding:.25rem .6rem;border-radius:999px;font-size:.75rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+    .plan-row{display:flex;align-items:center;justify-content:space-between;gap:.6rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:.6rem .8rem}
+    .plan-left{display:flex;align-items:center;gap:.6rem}
+    .plan-price{font-weight:900}
+  </style>
+</head>
+<body class="dark">
+  <header class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="index.html" class="text-white/70 hover:text-white"><i class="ri-arrow-left-line"></i> Back to Catalog</a>
+    <a href="index.html" class="text-white/70 hover:text-white"><i class="ri-store-2-line"></i> Catalog</a>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 pb-16">
+    <div id="wrap" class="glass rounded-2xl p-5 md:p-8 shadow-glow"></div>
+  </main>
+
+  <script>
+    const fmtBDT = n => `৳${Number(n).toLocaleString('en-IN')}`;
+    const wrap = document.getElementById('wrap');
+    const prod = JSON.parse(localStorage.getItem('sf_detail_product')||'null');
+
+    // লোকাল কার্টে আইটেম যোগ (index.html-এর স্ট্রাকচার মেনে)
+    function addToCartLocal(pid, planLabel, price, meta){
+      const cart = JSON.parse(localStorage.getItem('sf_cart')||'[]');
+      const key = `${pid}|${planLabel}`;
+      const found = cart.find(i=>i.key===key);
+      if(found){ found.qty += 1; if(meta && Object.keys(meta).length){ found.meta = {...(found.meta||{}), ...meta}; } }
+      else { cart.push({ key, pid, plan: planLabel, price, qty:1, meta: meta||{} }); }
+      localStorage.setItem('sf_cart', JSON.stringify(cart));
+      toast('Added to cart! Go back to Catalog to checkout.');
+    }
+
+    function toast(msg){
+      let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast';
+        el.className='fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/95 border border-white/10 text-white px-4 py-2 rounded-xl shadow-lg z-[100]'; document.body.appendChild(el); }
+      el.textContent=msg; el.style.opacity='1'; clearTimeout(window.__t); window.__t=setTimeout(()=>el.style.opacity='0',2200);
+    }
+
+    if(!prod){
+      wrap.innerHTML = '<div class="text-center text-white/60 py-20">কোনো প্রোডাক্ট পাওয়া যায়নি। <a class="underline" href="index.html">Catalog</a> এ ফিরে যান।</div>';
+    } else {
+      document.title = prod.name + ' — SubFusion';
+      const perks = (prod.perks||[]).map(p=>`<span class="chip">${p}</span>`).join('');
+
+      // ইনপুট (যদি থাকে)
+      const inputs = (prod.inputs||[]).map(i=>`
+        <label class="block text-sm text-white/70">${i.label}${i.required?' *':''}
+          <input data-meta="${i.key}" type="${i.type||'text'}" placeholder="${i.placeholder||''}"
+            class="w-full mt-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2"/>
+        </label>
+      `).join('');
+
+      // প্ল্যান লিস্ট + Add to Cart
+      const plans = prod.plans.map(pl=>`
+        <div class="plan-row">
+          <div class="plan-left"><span class="tag">${pl.label}</span><span class="plan-price">${fmtBDT(pl.price)}</span></div>
+          <button class="btn btn-primary text-sm" data-add data-plan="${pl.label}" data-price="${pl.price}"><i class="ri-add-line"></i> Add to Cart</button>
+        </div>
+      `).join('');
+
+      wrap.innerHTML = `
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h1 class="text-2xl md:text-3xl font-black">${prod.name}</h1>
+            <div class="text-xs text-white/60 mt-1">⭐ ${Number(prod.rating||0).toFixed(1)} • ${prod.category}</div>
+          </div>
+          ${prod.badge?`<span class="tag">${prod.badge}</span>`:''}
+        </div>
+
+        <div class="mt-3 flex flex-wrap gap-2">${perks}</div>
+
+        ${inputs ? `<h3 class="mt-6 font-bold text-white/80">Required Info</h3>
+        <div class="mt-2 grid md:grid-cols-2 gap-3">${inputs}</div>`:''}
+
+        <h3 class="mt-6 font-bold text-white/80">Plans & Prices</h3>
+        <div class="mt-2 grid gap-2">${plans}</div>
+
+        <div class="mt-6 text-xs text-white/50">কার্ট/চেকআউট দেখতে Catalog পেজে ফিরে যান।</div>
+        <div class="mt-3"><a href="index.html" class="btn btn-soft"><i class="ri-store-2-line"></i> Back to Catalog</a></div>
+      `;
+
+      // Add handlers
+      const metaBoxValues = ()=> {
+        const m = {};
+        document.querySelectorAll('[data-meta]').forEach(inp=>{
+          const v = inp.value.trim(); const key = inp.getAttribute('data-meta');
+          if(v) m[key]=v;
+        });
+        return m;
+      };
+      document.querySelectorAll('[data-add]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const plan = btn.getAttribute('data-plan');
+          const price = Number(btn.getAttribute('data-price'));
+          const meta = metaBoxValues();
+
+          // ভ্যালিডেশনের জন্য required চেক (যদি থাকে)
+          const reqs = (prod.inputs||[]).filter(i=>i.required);
+          for(const r of reqs){
+            if(!meta[r.key] || !String(meta[r.key]).trim()){
+              toast(`Please fill: ${r.label}`); return;
+            }
+            if(r.type==='email' && !/^\S+@\S+\.\S+$/.test(meta[r.key])){ toast('Valid email needed'); return; }
+            if(r.type==='url' && !/^https?:\/\//i.test(meta[r.key])){ toast('Valid URL needed'); return; }
+          }
+
+          addToCartLocal(prod.id, plan, price, meta);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
