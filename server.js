@@ -8,9 +8,9 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.')); // serve index.html + product.html
+app.use(express.static('.')); // serve index.html & product.html
 
-/* ---------- Email Transport ---------- */
+/* Email Transport (optional but recommended) */
 let transporter = null;
 if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
   transporter = nodemailer.createTransport({
@@ -21,7 +21,7 @@ if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
   });
 }
 
-/* ---------- VIP Email Template ---------- */
+/* VIP Receipt HTML */
 function renderReceiptHTML(order){
   const rows = order.items.map(i=>{
     const meta = i.meta && Object.keys(i.meta).length
@@ -83,7 +83,7 @@ function renderReceiptHTML(order){
   </div>`;
 }
 
-/* ---------- API: Order + Email ---------- */
+/* Order + Email */
 app.post('/api/order', async (req, res) => {
   try{
     const order = req.body;
@@ -106,15 +106,18 @@ app.post('/api/order', async (req, res) => {
   }
 });
 
-/* ---------- API: SSLCOMMERZ Hosted Checkout ---------- */
+/* SSLCOMMERZ Hosted Checkout (LIVE if creds exist, else demo) */
 app.post('/api/payment/create', async (req, res) => {
   const items = req.body.items || [];
-  const amount = items.reduce((s,i)=> s + i.price * i.qty, 0) * 1.02;
+  const amount = items.reduce((s,i)=> s + i.price * i.qty, 0) * 1.02; // +2% fees
   const tran_id = 'SF' + Date.now();
 
+  // If no creds, open demo page
   if (!process.env.SSL_STORE_ID || !process.env.SSL_STORE_PASSWD) {
     return res.json({ demo:true, demoUrl:'https://sandbox.sslcommerz.com/EasyCheckOut/test' });
   }
+
+  const base = process.env.BASE_URL?.replace(/\/+$/,'') || 'http://localhost:5173';
 
   const payload = {
     store_id: process.env.SSL_STORE_ID,
@@ -122,10 +125,10 @@ app.post('/api/payment/create', async (req, res) => {
     total_amount: Math.round(amount),
     currency: 'BDT',
     tran_id,
-    success_url: process.env.BASE_URL + '/api/payment/success',
-    fail_url: process.env.BASE_URL + '/api/payment/fail',
-    cancel_url: process.env.BASE_URL + '/api/payment/cancel',
-    ipn_url: process.env.BASE_URL + '/api/payment/ipn',
+    success_url: `${base}/api/payment/success`,
+    fail_url: `${base}/api/payment/fail`,
+    cancel_url: `${base}/api/payment/cancel`,
+    ipn_url: `${base}/api/payment/ipn`,
     product_category: 'digital',
     product_profile: 'non-physical-goods',
     product_name: 'SubFusion Cart Items',
@@ -143,9 +146,9 @@ app.post('/api/payment/create', async (req, res) => {
   }catch(e){ console.error('SSL session error:', e); res.status(500).json({ error:'SSL_SESSION_FAILED' }); }
 });
 
-/* ---------- Optional IPN ---------- */
+/* SSL IPN + return pages (simple demo) */
 app.post('/api/payment/ipn', (req, res) => { console.log('IPN:', req.body); res.json({ ok:true }); });
-app.get('/api/payment/success', (req,res)=>res.send('Payment Success — complete order in DB here.'));
+app.get('/api/payment/success', (req,res)=>res.send('Payment Success — thank you! (Implement order finalize in DB here)'));
 app.get('/api/payment/fail', (req,res)=>res.send('Payment Failed'));
 app.get('/api/payment/cancel', (req,res)=>res.send('Payment Cancelled'));
 
