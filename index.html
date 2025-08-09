@@ -59,14 +59,13 @@
       <div>
         <div class="tag mb-3">Premium Theme • Ultra Responsive</div>
         <h2 class="text-3xl md:text-5xl font-black leading-tight">সব কিছু এক প্ল্যাটফর্মে—<span class="text-sky-300">টপ-আপ, সাবস্ক্রিপশন, গিফট কার্ড, বুস্ট</span>।</h2>
-        <p class="text-white/70 mt-3 md:text-lg">bKash • Nagad • Rocket • Online Card (SSLCOMMERZ)। “More details” এ ক্লিক করুন → detail পেজে Add to Cart → এখানে Cart থেকে Checkout/Pay.</p>
+        <p class="text-white/70 mt-3 md:text-lg">“More details” → detail পেজে Add to Cart → Cart থেকে **Pay Online (SSL)**. পেমেন্ট ছাড়া অর্ডার হবে না।</p>
         <div class="mt-5 flex flex-wrap gap-3">
           <a href="#catalog" class="btn btn-primary"><i class="ri-rocket-2-line"></i> Explore</a>
           <a href="#brands" class="btn btn-soft"><i class="ri-vip-diamond-line"></i> Brands</a>
         </div>
       </div>
 
-      <!-- Quick Picks -->
       <div class="glass rounded-2xl p-5 md:p-7 shadow-glow">
         <div class="text-sm text-white/70 mb-2">Quick Picks</div>
         <div class="grid grid-cols-2 gap-3 text-sm">
@@ -85,7 +84,7 @@
     <div class="glass rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-white/10">
       <img class="brand-logo" alt="YouTube" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg">
       <img class="brand-logo" alt="Netflix" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg">
-      <img class="brand-logo" alt="Disney+" src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg">
+      <img class="brand-logo" alt "Disney+" src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg">
       <img class="brand-logo" alt="Prime Video" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
       <img class="brand-logo" alt="Xbox" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Xbox_one_logo.svg">
       <img class="brand-logo" alt="Steam" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg">
@@ -139,7 +138,6 @@
       </div>
     </div>
 
-    <!-- GRID -->
     <div class="mt-6 grid-auto" id="productGrid"></div>
     <div id="emptyState" class="hidden text-center text-white/60 py-16">
       <i class="ri-inbox-archive-line text-5xl text-white/20"></i>
@@ -152,7 +150,7 @@
     <i class="ri-shopping-cart-2-line"></i> <span id="cartCount">0</span>
   </button>
 
-  <!-- CART + CHECKOUT DRAWER -->
+  <!-- CART DRAWER -->
   <div id="cartDrawer" class="fixed inset-y-0 right-0 w-[92%] sm:w-[430px] bg-slate-950/95 backdrop-blur-lg border-l border-white/10 translate-x-full transition z-[60]">
     <div class="h-full flex flex-col">
       <div class="p-4 border-b border-white/10 flex items-center justify-between">
@@ -173,21 +171,20 @@
         <div class="flex items-center justify-between mt-2 text-lg">
           <span class="font-bold">Total</span><span id="grandTotal" class="font-extrabold">৳0</span>
         </div>
-        <div class="mt-3 grid grid-cols-2 gap-2">
-          <button id="openCheckout" class="btn btn-primary w-full"><i class="ri-bank-card-2-line"></i> Checkout</button>
-          <button id="payOnlineBtn" class="btn btn-soft w-full"><i class="ri-external-link-line"></i> Pay Online</button>
+        <div class="mt-3">
+          <button id="openCheckout" class="btn btn-primary w-full"><i class="ri-global-line"></i> Pay Online (SSL)</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- CHECKOUT MODAL -->
+  <!-- CHECKOUT MODAL (only Online Card) -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[70]">
     <div class="max-w-xl mx-auto mt-10 md:mt-20 glass rounded-2xl p-6 border-white/10">
       <div class="flex items-start justify-between">
         <div>
-          <h3 class="text-2xl font-extrabold">Checkout</h3>
-          <p class="text-white/60 text-sm">তথ্য দিন ও পেমেন্ট সিলেক্ট করুন।</p>
+          <h3 class="text-2xl font-extrabold">Pay Online (SSL)</h3>
+          <p class="text-white/60 text-sm">তথ্য দিন → SSLCommerz পেজে পেমেন্ট করুন।</p>
         </div>
         <button id="closeCheckout" class="btn btn-soft"><i class="ri-close-line"></i></button>
       </div>
@@ -208,50 +205,24 @@
       </div>
 
       <div class="mt-5">
-        <div class="text-sm text-white/70 mb-2">পেমেন্ট মেথড</div>
-        <div class="flex flex-wrap gap-2">
-          <div class="pay-pill flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer" data-pay="bkash"><img alt="bKash" src="https://upload.wikimedia.org/wikipedia/commons/0/0c/BKash_logo.svg" class="h-5"> bKash</div>
-          <div class="pay-pill flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer" data-pay="nagad"><img alt="Nagad" src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Nagad_Logo.png" class="h-5"> Nagad</div>
-          <div class="pay-pill flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer" data-pay="rocket"><img alt="Rocket" src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Rocket_logo_Dutch-Bangla_Bank.svg" class="h-5"> Rocket</div>
-          <div class="pay-pill flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer" data-pay="online"><i class="ri-global-line"></i> Online Card (SSL)</div>
-        </div>
-        <input type="hidden" id="payMethod" value="">
-      </div>
-
-      <div id="payInfo" class="mt-4 hidden">
-        <div class="p-3 rounded-xl bg-white/5 border border-white/10 text-sm">
-          <div class="font-semibold mb-1">bKash/Nagad/Rocket নির্দেশনা</div>
-          <p class="text-white/70">নিচের নাম্বারে Send Money করুন এবং TxID লিখুন:</p>
-          <ul class="list-disc pl-5 text-white/70">
-            <li>bKash (Send Money): <span class="font-mono font-bold">01961885733</span></li>
-            <li>Nagad: <span class="font-mono">01XXXXXXXXX</span></li>
-            <li>Rocket: <span class="font-mono">01XXXXXXXXX</span></li>
-          </ul>
-          <input id="txid" class="w-full mt-2 bg-white/5 border border-white/10 rounded-xl px-3 py-2" placeholder="e.g., TX123ABC">
-        </div>
-      </div>
-
-      <div class="mt-5">
         <div class="flex items-center justify-between">
           <span class="text-white/70 text-sm">চূড়ান্ত মূল্য</span>
           <span id="checkoutTotal" class="text-lg font-extrabold">৳0</span>
         </div>
-        <button id="placeOrder" class="btn btn-primary w-full mt-3"><i class="ri-lock-2-line"></i> Place Order</button>
+        <button id="paySSL" class="btn btn-primary w-full mt-3"><i class="ri-lock-2-line"></i> Continue to Pay</button>
       </div>
     </div>
   </div>
 
   <footer id="how" class="mt-12 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-8 text-center text-white/60 text-sm">
-      <p><b>কিভাবে কাজ করে?</b> প্রোডাক্টে “More details” → detail পেজে Add to Cart → হোমে Cart খুলে Checkout/Pay Online।</p>
+      <p><b>কিভাবে কাজ করে?</b> “More details” → Add to Cart → Cart → Pay Online (SSL). পেমেন্ট ছাড়া অর্ডার হবে না।</p>
       <p class="mt-2">© <span id="year"></span> SubFusion • Built with ❤️</p>
     </div>
   </footer>
 
   <script>
-    const OWNER_EMAIL = "nishadjr875@gmail.com";
-
-    /* ---------- PRODUCTS ---------- */
+    /* ================== DATA ================== */
     const PRODUCTS = [
       { id:'youtube', name:'YouTube Premium', category:'streaming', rating:4.9, popular:true, badge:'Hot',
         plans:[{label:'1 Month',price:100},{label:'2 Months',price:200},{label:'12 Months',price:1100}],
@@ -307,20 +278,19 @@
       },
     ];
 
-    /* ---------- UTIL ---------- */
+    /* ================== UTIL ================== */
     const byId=id=>document.getElementById(id);
     const fmtBDT = n => `৳${n.toLocaleString('en-IN')}`;
-    function minPrice(p){ return Math.min(...p.plans.map(x=>x.price)); }
-    function openDetails(pid){
-      const prod = PRODUCTS.find(x=>x.id===pid);
-      localStorage.setItem('sf_detail_product', JSON.stringify(prod));
-      window.open('product.html', '_blank');
-    }
-    function toast(msg){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.className='fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/95 border border-white/10 text-white px-4 py-2 rounded-xl shadow-lg z-[100]'; document.body.appendChild(el);} el.textContent=msg; el.style.opacity='1'; clearTimeout(window.__t); window.__t=setTimeout(()=>el.style.opacity='0',2200); }
+    const labelCat=c=>c==='streaming'?'Streaming':c==='ai'?'AI':c==='gaming'?'Game Top-up':c==='keys'?'Game Keys':c==='giftcard'?'Gift Cards':c==='communication'?'Communication':c==='ads'?'Social/Ads':c;
 
-    /* ---------- GRID (Only More details) ---------- */
+    function toast(msg){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.className='fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/95 border border-white/10 text-white px-4 py-2 rounded-xl shadow-lg z-[100]'; document.body.appendChild(el);} el.textContent=msg; el.style.opacity='1'; clearTimeout(window.__t); window.__t=setTimeout(()=>el.style.opacity='0',2200); }
+    function minPrice(p){ return Math.min(...p.plans.map(x=>x.price)); }
+    function openDetails(pid){ const prod = PRODUCTS.find(x=>x.id===pid); localStorage.setItem('sf_detail_product', JSON.stringify(prod)); window.open('product.html','_blank'); }
+    function getCart(){ return JSON.parse(localStorage.getItem('sf_cart')||'[]'); }
+    function setCart(c){ localStorage.setItem('sf_cart', JSON.stringify(c)); }
+
+    /* ================== GRID ================== */
     const productGrid = byId('productGrid'), emptyState = byId('emptyState');
-    function labelCat(c){ return c==='streaming'?'Streaming':c==='ai'?'AI':c==='gaming'?'Game Top-up':c==='keys'?'Game Keys':c==='giftcard'?'Gift Cards':c==='communication'?'Communication':c==='ads'?'Social/Ads':c; }
     function renderProducts(){
       const q=byId('searchInput').value.toLowerCase().trim();
       const cat=byId('categorySelect').value;
@@ -355,9 +325,7 @@
               </div>
               <div class="text-xs text-white/60 mt-1">⭐ ${p.rating.toFixed(1)} • ${labelCat(p.category)}</div>
             </div>
-            <button class="btn btn-soft text-xs" data-info="${p.id}">
-              <i class="ri-information-line"></i> More details
-            </button>
+            <button class="btn btn-soft text-xs" data-info="${p.id}"><i class="ri-information-line"></i> More details</button>
           </div>
           <div class="mt-3 flex flex-wrap gap-2">${(p.perks||[]).map(x=>`<span class="chip">${x}</span>`).join('')}</div>
           <div class="mt-4 text-sm text-white/70">Starts at <b>${fmtBDT(minPrice(p))}</b></div>`;
@@ -366,15 +334,11 @@
       productGrid.querySelectorAll('[data-info]').forEach(btn=>btn.addEventListener('click',()=>openDetails(btn.dataset.info)));
     }
 
-    /* ---------- CART/Checkout (from localStorage) ---------- */
+    /* ================== CART ================== */
     const cartDrawer=byId('cartDrawer'), cartItems=byId('cartItems');
-    const subTotalEl=byId('subTotal'), feesEl=byId('fees'), grandTotalEl=byId('grandTotal');
-    const cartCount=byId('cartCount');
+    const subTotalEl=byId('subTotal'), feesEl=byId('fees'), grandTotalEl=byId('grandTotal'), cartCount=byId('cartCount');
 
-    function getCart(){ return JSON.parse(localStorage.getItem('sf_cart')||'[]'); }
-    function setCart(c){ localStorage.setItem('sf_cart', JSON.stringify(c)); }
     function updateCartCount(){ const c=getCart().reduce((s,i)=>s+i.qty,0); cartCount.textContent=c; }
-
     function renderCart(){
       const cart=getCart(); cartItems.innerHTML='';
       if(!cart.length){ cartItems.innerHTML=`<div class="text-center text-white/60 py-12"><i class="ri-shopping-cart-line text-5xl text-white/20"></i><p class="mt-2">কার্ট খালি।</p></div>`; }
@@ -385,10 +349,7 @@
           row.className='bg-white/5 border border-white/10 rounded-xl p-3';
           row.innerHTML=`
             <div class="flex items-center justify-between">
-              <div>
-                <div class="font-bold">${p.name}</div>
-                <div class="text-xs text-white/60">${i.plan}</div>
-              </div>
+              <div><div class="font-bold">${p.name}</div><div class="text-xs text-white/60">${i.plan}</div></div>
               <div class="text-right">
                 <div class="font-bold">${fmtBDT(i.price*i.qty)}</div>
                 <div class="flex items-center gap-2 justify-end mt-1">
@@ -406,63 +367,39 @@
           }
           cartItems.appendChild(row);
         }
-        cartItems.querySelectorAll('[data-inc]').forEach(b=>b.onclick=()=>changeQty(b.dataset.inc, +1));
-        cartItems.querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>changeQty(b.dataset.dec, -1));
+        cartItems.querySelectorAll('[data-inc]').forEach(b=>b.onclick=()=>changeQty(b.dataset.inc,+1));
+        cartItems.querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>changeQty(b.dataset.dec,-1));
         cartItems.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>removeItem(b.dataset.del));
       }
-      const cart2=getCart();
-      const subtotal=cart2.reduce((s,i)=>s+i.price*i.qty,0);
+      const subtotal=getCart().reduce((s,i)=>s+i.price*i.qty,0);
       const fees=Math.round(subtotal*0.02);
       const total=subtotal+fees;
-      subTotalEl.textContent=fmtBDT(subtotal); feesEl.textContent=fmtBDT(fees); grandTotalEl.textContent=fmtBDT(total);
+      subTotalEl.textContent=fmtBDT(subtotal);
+      feesEl.textContent=fmtBDT(fees);
+      grandTotalEl.textContent=fmtBDT(total);
       byId('checkoutTotal').textContent=fmtBDT(total);
       updateCartCount();
     }
-    function changeQty(key, d){
-      const cart=getCart(); const it=cart.find(x=>x.key===key); if(!it) return;
-      it.qty+=d; if(it.qty<=0) cart.splice(cart.indexOf(it),1);
-      setCart(cart); renderCart();
-    }
-    function removeItem(key){ const cart=getCart().filter(x=>x.key!==key); setCart(cart); renderCart(); }
-
+    function changeQty(key,d){ const cart=getCart(); const it=cart.find(x=>x.key===key); if(!it) return; it.qty+=d; if(it.qty<=0) cart.splice(cart.indexOf(it),1); setCart(cart); renderCart(); }
+    function removeItem(key){ setCart(getCart().filter(x=>x.key!==key)); renderCart(); }
     function openCart(){ cartDrawer.style.transform='translateX(0)'; renderCart(); }
     function closeCart(){ cartDrawer.style.transform='translateX(100%)'; }
     byId('cartFab').onclick=openCart; byId('closeCart').onclick=closeCart;
 
-    // Checkout modal
+    // Checkout modal open
     const checkoutModal=byId('checkoutModal');
-    byId('openCheckout').onclick=()=>{ if(!getCart().length){toast('কার্ট খালি');return;} checkoutModal.classList.remove('hidden'); };
+    byId('openCheckout').onclick=()=>{ if(!getCart().length){ toast('কার্ট খালি'); return; } checkoutModal.classList.remove('hidden'); };
     byId('closeCheckout').onclick=()=>checkoutModal.classList.add('hidden');
 
-    // Payment pills
-    document.querySelectorAll('.pay-pill').forEach(p=>{
-      p.addEventListener('click',()=>{ document.querySelectorAll('.pay-pill').forEach(x=>x.classList.remove('active')); p.classList.add('active'); byId('payMethod').value=p.dataset.pay;
-        byId('payInfo').classList.toggle('hidden', !['bkash','nagad','rocket'].includes(p.dataset.pay)); });
-    });
-
-    // Pay Online (SSLCommerz)
-    byId('payOnlineBtn').addEventListener('click', async ()=>{
-      if(!getCart().length) return toast('কার্ট খালি');
-      try{
-        const res=await fetch('/api/payment/create',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:getCart()})});
-        const data=await res.json();
-        if(data?.GatewayPageURL){ window.location.href=data.GatewayPageURL; }
-        else if(data?.demoUrl){ window.open(data.demoUrl,'_blank'); toast('ডেমো পেমেন্ট ওপেন হয়েছে'); }
-        else toast('পেমেন্ট সেশন হয়নি');
-      }catch(e){ console.error(e); toast('পেমেন্ট ত্রুটি'); }
-    });
-
-    // Place Order (manual mobile pay)
-    byId('placeOrder').onclick=async ()=>{
+    // Pay Online (SSL)
+    byId('paySSL').addEventListener('click', async ()=>{
       const name=byId('custName').value.trim(), phone=byId('custPhone').value.trim(), email=byId('custEmail').value.trim();
-      const pay=byId('payMethod').value, txid=(byId('txid').value||'').trim();
       if(!getCart().length) return toast('কার্ট খালি');
       if(!name) return toast('নাম দিন');
       if(!/^01\d{9}$/.test(phone)) return toast('সঠিক মোবাইল (১১ ডিজিট)');
-      if(!pay) return toast('পেমেন্ট মেথড সিলেক্ট করুন');
-      if(['bkash','nagad','rocket'].includes(pay) && !txid) return toast('TxID দিন');
+      if(!/^\S+@\S+\.\S+$/.test(email)) return toast('সঠিক ইমেইল দিন');
 
-      // Required meta check
+      // প্রতিটি আইটেমের required meta ভ্যালিডেশন
       const cart=getCart();
       for(const it of cart){
         const prod=PRODUCTS.find(p=>p.id===it.pid);
@@ -473,27 +410,33 @@
         } }
       }
 
-      const subtotal = subTotalEl.textContent, fees = feesEl.textContent, total = grandTotalEl.textContent;
-      const order={ id:'SF'+Date.now(), name, phone, email, pay, txid, items:cart, subtotal, fees, total, ownerEmail:"nishadjr875@gmail.com", createdAt:new Date().toISOString() };
-
       try{
-        const r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(order)});
-        const j=await r.json(); if(j.ok){ toast('অর্ডার ✔️ — ইমেইল পাঠানো হয়েছে'); } else toast('অর্ডার সম্পন্ন (ইমেইল কনফিগ নেই)');
-      }catch(e){ console.warn(e); toast('সার্ভার রেসপন্স নেই (লোকাল?)'); }
+        const res=await fetch('/api/payment/create',{
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({ items:cart, customer:{name,phone,email} })
+        });
+        const data=await res.json();
+        if(data?.GatewayPageURL){ // LIVE
+          localStorage.setItem('sf_cart','[]'); // clear local cart before redirect
+          window.location.href=data.GatewayPageURL;
+        }else if(data?.demoUrl){ // no creds → demo
+          window.open(data.demoUrl,'_blank'); toast('ডেমো পেমেন্ট ওপেন হয়েছে');
+        }else{
+          toast('পেমেন্ট সেশন হয়নি');
+        }
+      }catch(err){ console.error(err); toast('পেমেন্ট ত্রুটি'); }
+    });
 
-      setCart([]); renderCart(); checkoutModal.classList.add('hidden'); closeCart();
-    };
-
-    /* ---------- INIT ---------- */
+    /* ================== INIT ================== */
     function init(){
-      byId('year').textContent=new Date().getFullYear();
-      byId('statPlans').textContent = PRODUCTS.length;
-      byId('modeSwitch').onclick=()=>{ document.body.classList.toggle('dark'); byId('modeSwitch').classList.toggle('active'); };
-      byId('themeToggle').onclick=()=>{ document.body.classList.toggle('dark'); byId('modeSwitch').classList.toggle('active'); };
-      renderProducts(); updateCartCount();
-      byId('searchInput').addEventListener('input', renderProducts);
-      byId('categorySelect').addEventListener('change', renderProducts);
-      byId('sortSelect').addEventListener('change', renderProducts);
+      document.getElementById('year').textContent=new Date().getFullYear();
+      document.getElementById('statPlans').textContent = PRODUCTS.length;
+      document.getElementById('modeSwitch').onclick=()=>{ document.body.classList.toggle('dark'); document.getElementById('modeSwitch').classList.toggle('active'); };
+      document.getElementById('themeToggle').onclick=()=>{ document.body.classList.toggle('dark'); document.getElementById('modeSwitch').classList.toggle('active'); };
+      renderProducts(); renderCart();
+      document.getElementById('searchInput').addEventListener('input', renderProducts);
+      document.getElementById('categorySelect').addEventListener('change', renderProducts);
+      document.getElementById('sortSelect').addEventListener('change', renderProducts);
     }
     init();
   </script>
