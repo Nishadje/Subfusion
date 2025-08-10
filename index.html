@@ -59,7 +59,7 @@
       <div>
         <div class="tag mb-3">Premium Theme • Ultra Responsive</div>
         <h2 class="text-3xl md:text-5xl font-black leading-tight">সব কিছু এক প্ল্যাটফর্মে—<span class="text-sky-300">টপ-আপ, সাবস্ক্রিপশন, গিফট কার্ড, বুস্ট</span>।</h2>
-        <p class="text-white/70 mt-3 md:text-lg">“More details” → detail পেজে Add to Cart → Cart থেকে **Pay Online (SSL)**. পেমেন্ট ছাড়া অর্ডার হবে না।</p>
+        <p class="text-white/70 mt-3 md:text-lg">“More details” → detail পেজে Add to Cart → Cart থেকে **Pay Online (bKash/Nagad)**. পেমেন্ট ছাড়া অর্ডার হবে না।</p>
         <div class="mt-5 flex flex-wrap gap-3">
           <a href="#catalog" class="btn btn-primary"><i class="ri-rocket-2-line"></i> Explore</a>
           <a href="#brands" class="btn btn-soft"><i class="ri-vip-diamond-line"></i> Brands</a>
@@ -84,7 +84,7 @@
     <div class="glass rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-white/10">
       <img class="brand-logo" alt="YouTube" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg">
       <img class="brand-logo" alt="Netflix" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg">
-      <img class="brand-logo" alt "Disney+" src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg">
+      <img class="brand-logo" alt="Disney+" src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg">
       <img class="brand-logo" alt="Prime Video" src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png">
       <img class="brand-logo" alt="Xbox" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Xbox_one_logo.svg">
       <img class="brand-logo" alt="Steam" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg">
@@ -150,41 +150,13 @@
     <i class="ri-shopping-cart-2-line"></i> <span id="cartCount">0</span>
   </button>
 
-  <!-- CART DRAWER -->
-  <div id="cartDrawer" class="fixed inset-y-0 right-0 w-[92%] sm:w-[430px] bg-slate-950/95 backdrop-blur-lg border-l border-white/10 translate-x-full transition z-[60]">
-    <div class="h-full flex flex-col">
-      <div class="p-4 border-b border-white/10 flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <i class="ri-shopping-bag-3-line text-2xl text-brand-400"></i>
-          <h3 class="text-xl font-bold">Your Cart</h3>
-        </div>
-        <button id="closeCart" class="btn btn-soft text-sm"><i class="ri-close-line"></i> Close</button>
-      </div>
-      <div id="cartItems" class="flex-1 overflow-auto p-4 space-y-3"></div>
-      <div class="p-4 border-t border-white/10">
-        <div class="flex items-center justify-between text-white/70 text-sm">
-          <span>Subtotal</span><span id="subTotal" class="font-bold">৳0</span>
-        </div>
-        <div class="flex items-center justify-between text-white/70 text-sm">
-          <span>Fees</span><span id="fees" class="font-bold">৳0</span>
-        </div>
-        <div class="flex items-center justify-between mt-2 text-lg">
-          <span class="font-bold">Total</span><span id="grandTotal" class="font-extrabold">৳0</span>
-        </div>
-        <div class="mt-3">
-          <button id="openCheckout" class="btn btn-primary w-full"><i class="ri-global-line"></i> Pay Online (SSL)</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CHECKOUT MODAL (only Online Card) -->
+  <!-- CHECKOUT -->
   <div id="checkoutModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-[70]">
     <div class="max-w-xl mx-auto mt-10 md:mt-20 glass rounded-2xl p-6 border-white/10">
       <div class="flex items-start justify-between">
         <div>
-          <h3 class="text-2xl font-extrabold">Pay Online (SSL)</h3>
-          <p class="text-white/60 text-sm">তথ্য দিন → SSLCommerz পেজে পেমেন্ট করুন।</p>
+          <h3 class="text-2xl font-extrabold">Pay Online (bKash/Nagad)</h3>
+          <p class="text-white/60 text-sm">তথ্য দিন → bKash/Nagad পেমেন্ট করুন।</p>
         </div>
         <button id="closeCheckout" class="btn btn-soft"><i class="ri-close-line"></i></button>
       </div>
@@ -209,14 +181,16 @@
           <span class="text-white/70 text-sm">চূড়ান্ত মূল্য</span>
           <span id="checkoutTotal" class="text-lg font-extrabold">৳0</span>
         </div>
-        <button id="paySSL" class="btn btn-primary w-full mt-3"><i class="ri-lock-2-line"></i> Continue to Pay</button>
+        <div class="mt-3">
+          <button id="placeOrder" class="btn btn-primary w-full"><i class="ri-lock-2-line"></i> Place Order</button>
+        </div>
       </div>
     </div>
   </div>
 
   <footer id="how" class="mt-12 border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-8 text-center text-white/60 text-sm">
-      <p><b>কিভাবে কাজ করে?</b> “More details” → Add to Cart → Cart → Pay Online (SSL). পেমেন্ট ছাড়া অর্ডার হবে না।</p>
+      <p><b>কিভাবে কাজ করে?</b> “More details” → Add to Cart → Cart → Pay Online (bKash/Nagad). পেমেন্ট ছাড়া অর্ডার হবে না।</p>
       <p class="mt-2">© <span id="year"></span> SubFusion • Built with ❤️</p>
     </div>
   </footer>
@@ -233,106 +207,17 @@
         plans:[{label:'1 Month',price:350},{label:'3 Months',price:999},{label:'12 Months',price:3799}],
         perks:['HD/4K','Multiple Profiles'],
         inputs:[{key:'profile_email',label:'Profile Email (optional)',placeholder:'you@example.com',type:'email'}]
-      },
-      { id:'prime-video', name:'Prime Video', category:'streaming', rating:4.6,
-        plans:[{label:'1 Month',price:199},{label:'6 Months',price:1099}], perks:['Amazon Originals','X-Ray'],
-        inputs:[{key:'pv_email',label:'Amazon Email',placeholder:'your@email.com',type:'email',required:true}]
-      },
-      { id:'disney-plus', name:'Disney+', category:'streaming', rating:4.7,
-        plans:[{label:'1 Month',price:249},{label:'12 Months',price:2199}], perks:['Marvel','Star Wars'],
-        inputs:[{key:'dsny_email',label:'Account Email',placeholder:'your@email.com',type:'email',required:true}]
-      },
-      { id:'chatgpt-plus', name:'ChatGPT Plus', category:'ai', rating:4.9, badge:'Pro',
-        plans:[{label:'1 Month',price:950},{label:'3 Months',price:2700}], perks:['Priority Access','Faster responses'],
-        inputs:[{key:'gpt_email',label:'OpenAI Email',placeholder:'your@email.com',type:'email',required:true}]
-      },
-      { id:'discord-nitro', name:'Discord Nitro', category:'communication', rating:4.7,
-        plans:[{label:'1 Month',price:299},{label:'12 Months',price:2999}], perks:['Animated emoji','HD streaming'],
-        inputs:[{key:'discord_user',label:'Discord Username / ID',placeholder:'user#1234 বা User ID',type:'text',required:true}]
-      },
-      { id:'freefire-diamond', name:'Free Fire Diamonds', category:'gaming', rating:4.7, badge:'New',
-        plans:[{label:'100 Diamonds',price:110},{label:'310 Diamonds',price:330},{label:'520 Diamonds',price:540},{label:'1060 Diamonds',price:1100}],
-        perks:['Top-up via Player ID'],
-        inputs:[{key:'ff_uid',label:'Free Fire UID',placeholder:'Player UID',type:'text',required:true},{key:'ff_server',label:'Server/Region',placeholder:'BD/SG/IN ...',type:'text'}]
-      },
-      { id:'minecraft', name:'Minecraft (Java/Bedrock)', category:'keys', rating:4.7,
-        plans:[{label:'Java Edition (Key)',price:2599},{label:'Bedrock (Key)',price:1999}],
-        perks:['Official Key','Email Delivery'],
-        inputs:[{key:'delivery_email',label:'Delivery Email',placeholder:'Code পাঠানোর ইমেইল',type:'email',required:true}]
-      },
-      { id:'xbox-game-pass', name:'Xbox Game Pass', category:'giftcard', rating:4.8,
-        plans:[{label:'1 Month',price:599},{label:'3 Months',price:1699}], perks:['PC/Console'],
-        inputs:[{key:'delivery_email',label:'Delivery Email',placeholder:'Code পাঠানোর ইমেইল',type:'email',required:true}]
-      },
-      { id:'steam-gc', name:'Steam Gift Card', category:'giftcard', rating:4.8,
-        plans:[{label:'$10',price:1200},{label:'$20',price:2350},{label:'$50',price:5900}], perks:['Region-Note Applies'],
-        inputs:[{key:'delivery_email',label:'Delivery Email',placeholder:'Code পাঠানোর ইমেইল',type:'email',required:true}]
-      },
-      { id:'fb-boost', name:'Facebook Page/Ads Boost', category:'ads', rating:4.5, badge:'Business',
-        plans:[{label:'৳500 Credits',price:500},{label:'৳1000 Credits',price:1000},{label:'৳5000 Credits',price:5000}],
-        perks:['Targeted promotion','Report included'],
-        inputs:[
-          {key:'page_url',label:'Page/Ad URL',placeholder:'https://facebook.com/yourpage',type:'url',required:true},
-          {key:'notes',label:'Notes (Target/Goal)',placeholder:'Age/Location/Interest...',type:'text'}
-        ]
-      },
+      }
     ];
 
     /* ================== UTIL ================== */
     const byId=id=>document.getElementById(id);
     const fmtBDT = n => `৳${n.toLocaleString('en-IN')}`;
-    const labelCat=c=>c==='streaming'?'Streaming':c==='ai'?'AI':c==='gaming'?'Game Top-up':c==='keys'?'Game Keys':c==='giftcard'?'Gift Cards':c==='communication'?'Communication':c==='ads'?'Social/Ads':c;
 
     function toast(msg){ let el=document.getElementById('toast'); if(!el){ el=document.createElement('div'); el.id='toast'; el.className='fixed bottom-4 left-1/2 -translate-x-1/2 bg-slate-900/95 border border-white/10 text-white px-4 py-2 rounded-xl shadow-lg z-[100]'; document.body.appendChild(el);} el.textContent=msg; el.style.opacity='1'; clearTimeout(window.__t); window.__t=setTimeout(()=>el.style.opacity='0',2200); }
-    function minPrice(p){ return Math.min(...p.plans.map(x=>x.price)); }
     function openDetails(pid){ const prod = PRODUCTS.find(x=>x.id===pid); localStorage.setItem('sf_detail_product', JSON.stringify(prod)); window.open('product.html','_blank'); }
     function getCart(){ return JSON.parse(localStorage.getItem('sf_cart')||'[]'); }
     function setCart(c){ localStorage.setItem('sf_cart', JSON.stringify(c)); }
-
-    /* ================== GRID ================== */
-    const productGrid = byId('productGrid'), emptyState = byId('emptyState');
-    function renderProducts(){
-      const q=byId('searchInput').value.toLowerCase().trim();
-      const cat=byId('categorySelect').value;
-      const sort=byId('sortSelect').value;
-      let list=[...PRODUCTS].filter(p=>{
-        const inCat=(cat==='all'||p.category===cat);
-        const matches=p.name.toLowerCase().includes(q)||p.plans.some(pl=>pl.label.toLowerCase().includes(q));
-        return inCat&&matches;
-      });
-      list.sort((a,b)=>{
-        if (sort==='popular') return (b.popular===true)-(a.popular===true)||b.rating-a.rating;
-        if (sort==='price_asc') return minPrice(a)-minPrice(b);
-        if (sort==='price_desc') return minPrice(b)-minPrice(a);
-        if (sort==='name_asc') return a.name.localeCompare(b.name);
-        if (sort==='name_desc') return b.name.localeCompare(a.name);
-        return 0;
-      });
-
-      productGrid.innerHTML='';
-      if(!list.length){ emptyState.classList.remove('hidden'); return; }
-      emptyState.classList.add('hidden');
-
-      for (const p of list){
-        const card=document.createElement('div');
-        card.className='glass rounded-2xl p-4 border-white/10 shadow-glow';
-        card.innerHTML=`
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <div class="flex items-center gap-2">
-                <button class="text-left font-extrabold text-lg hover:underline" data-info="${p.id}">${p.name}</button>
-                ${p.badge?`<span class="tag">${p.badge}</span>`:''}
-              </div>
-              <div class="text-xs text-white/60 mt-1">⭐ ${p.rating.toFixed(1)} • ${labelCat(p.category)}</div>
-            </div>
-            <button class="btn btn-soft text-xs" data-info="${p.id}"><i class="ri-information-line"></i> More details</button>
-          </div>
-          <div class="mt-3 flex flex-wrap gap-2">${(p.perks||[]).map(x=>`<span class="chip">${x}</span>`).join('')}</div>
-          <div class="mt-4 text-sm text-white/70">Starts at <b>${fmtBDT(minPrice(p))}</b></div>`;
-        productGrid.appendChild(card);
-      }
-      productGrid.querySelectorAll('[data-info]').forEach(btn=>btn.addEventListener('click',()=>openDetails(btn.dataset.info)));
-    }
 
     /* ================== CART ================== */
     const cartDrawer=byId('cartDrawer'), cartItems=byId('cartItems');
@@ -360,11 +245,6 @@
                 </div>
               </div>
             </div>`;
-          if (i.meta && Object.keys(i.meta).length){
-            const metaDiv=document.createElement('div'); metaDiv.className='mt-2 text-[11px] text-white/50';
-            metaDiv.textContent = Object.entries(i.meta).map(([k,v])=>`${k}: ${v}`).join(' • ');
-            row.appendChild(metaDiv);
-          }
           cartItems.appendChild(row);
         }
         cartItems.querySelectorAll('[data-inc]').forEach(b=>b.onclick=()=>changeQty(b.dataset.inc,+1));
@@ -388,56 +268,71 @@
 
     // Checkout modal open
     const checkoutModal=byId('checkoutModal');
-    byId('openCheckout').onclick=()=>{ if(!getCart().length){ toast('কার্ট খালি'); return; } checkoutModal.classList.remove('hidden'); };
+    byId('placeOrder').onclick=()=>{ if(!getCart().length){ toast('কার্ট খালি'); return; } checkoutModal.classList.remove('hidden'); };
     byId('closeCheckout').onclick=()=>checkoutModal.classList.add('hidden');
 
-    // Pay Online (SSL)
-    byId('paySSL').addEventListener('click', async ()=>{
-      const name=byId('custName').value.trim(), phone=byId('custPhone').value.trim(), email=byId('custEmail').value.trim();
+    // Checkout (manual bKash / Nagad)
+    byId('placeOrder').onclick=async ()=>{
+      const name=byId('custName').value.trim(),
+            phone=byId('custPhone').value.trim(),
+            email=byId('custEmail').value.trim(),
+            payMethod=byId('payMethod').value.trim(),
+            txid=(byId('txid').value||'').trim(); // TxID 
+
       if(!getCart().length) return toast('কার্ট খালি');
       if(!name) return toast('নাম দিন');
       if(!/^01\d{9}$/.test(phone)) return toast('সঠিক মোবাইল (১১ ডিজিট)');
-      if(!/^\S+@\S+\.\S+$/.test(email)) return toast('সঠিক ইমেইল দিন');
+      if(!payMethod) return toast('পেমেন্ট মেথড সিলেক্ট করুন');
+      if((payMethod==='bkash'||payMethod==='nagad') && !txid) return toast('TxID দিন');
 
-      // প্রতিটি আইটেমের required meta ভ্যালিডেশন
+      // Required meta check
       const cart=getCart();
       for(const it of cart){
         const prod=PRODUCTS.find(p=>p.id===it.pid);
-        if(prod?.inputs){ for(const inp of prod.inputs.filter(x=>x.required)){
-          const v=(it.meta||{})[inp.key]; if(!v){ toast(`${prod.name}: ${inp.label} প্রয়োজন ❗`); return; }
-          if(inp.type==='email' && !/^\S+@\S+\.\S+$/.test(v)) { toast(`${prod.name}: সঠিক ইমেইল ❗`); return; }
-          if(inp.type==='url' && !/^https?:\/\//i.test(v)) { toast(`${prod.name}: সঠিক URL ❗`); return; }
-        } }
+        if(prod?.inputs){ 
+          for(const inp of prod.inputs.filter(x=>x.required)){
+            const v=(it.meta||{})[inp.key];
+            if(!v){ toast(`${prod.name}: ${inp.label} প্রয়োজন ❗`); return; }
+            if(inp.type==='email' && !/^\S+@\S+\.\S+$/.test(v)) { toast(`${prod.name}: সঠিক ইমেইল ❗`); return; }
+            if(inp.type==='url' && !/^https?:\/\//i.test(v)) { toast(`${prod.name}: সঠিক URL ❗`); return; }
+          }
+        }
       }
 
-      try{
-        const res=await fetch('/api/payment/create',{
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({ items:cart, customer:{name,phone,email} })
-        });
-        const data=await res.json();
-        if(data?.GatewayPageURL){ // LIVE
-          localStorage.setItem('sf_cart','[]'); // clear local cart before redirect
-          window.location.href=data.GatewayPageURL;
-        }else if(data?.demoUrl){ // no creds → demo
-          window.open(data.demoUrl,'_blank'); toast('ডেমো পেমেন্ট ওপেন হয়েছে');
-        }else{
-          toast('পেমেন্ট সেশন হয়নি');
-        }
-      }catch(err){ console.error(err); toast('পেমেন্ট ত্রুটি'); }
-    });
+      // Create Order Object
+      const subtotal = subTotalEl.textContent,
+            fees = feesEl.textContent, 
+            total = grandTotalEl.textContent;
 
-    /* ================== INIT ================== */
-    function init(){
-      document.getElementById('year').textContent=new Date().getFullYear();
-      document.getElementById('statPlans').textContent = PRODUCTS.length;
-      document.getElementById('modeSwitch').onclick=()=>{ document.body.classList.toggle('dark'); document.getElementById('modeSwitch').classList.toggle('active'); };
-      document.getElementById('themeToggle').onclick=()=>{ document.body.classList.toggle('dark'); document.getElementById('modeSwitch').classList.toggle('active'); };
-      renderProducts(); renderCart();
-      document.getElementById('searchInput').addEventListener('input', renderProducts);
-      document.getElementById('categorySelect').addEventListener('change', renderProducts);
-      document.getElementById('sortSelect').addEventListener('change', renderProducts);
-    }
+      const order = {
+        id: 'SF' + Date.now(),
+        name,
+        phone,
+        email,
+        payMethod,
+        txid,
+        items: cart,
+        subtotal,
+        fees,
+        total,
+        createdAt: new Date().toISOString()
+      };
+
+      // Send Order to Backend
+      try {
+        const r = await fetch('/api/order', {
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' }, 
+          body: JSON.stringify(order)
+        });
+        const j = await r.json();
+        if(j.ok){ toast('অর্ডার ✔️ — ইমেইল পাঠানো হয়েছে'); }
+        else toast('অর্ডার সম্পন্ন (ইমেইল কনফিগ নেই)');
+      } catch (e) { console.warn(e); toast('সার্ভার রেসপন্স নেই (লোকাল?)'); }
+
+      setCart([]); renderCart(); checkoutModal.classList.add('hidden');
+    };
+
     init();
   </script>
 </body>
